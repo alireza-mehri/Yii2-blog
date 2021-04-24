@@ -69,7 +69,6 @@ class SiteController extends Controller
                 'pageSize' => 5
             ]
         ]);
-
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);

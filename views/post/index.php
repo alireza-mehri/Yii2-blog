@@ -17,7 +17,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a(Yii::t('app', 'Create Post'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
@@ -26,7 +25,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title',
             'content',
-            'category',
             'status',
 
             ['class' => 'yii\grid\ActionColumn'],

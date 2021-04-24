@@ -48,4 +48,34 @@ class Post extends \yii\db\ActiveRecord
             'status' => Yii::t('app', 'Status'),
         ];
     }
+
+    public function getAllCategories()
+    {
+        $all = \app\models\Categories::find()->all();
+        return \yii\helpers\ArrayHelper::map($all, 'id', 'name');
+    }
+
+    public function getSelectedCategory()
+    {
+        $selected = [];
+        if ($this->isNewRecord != 1) {
+            $selected = \yii\helpers\ArrayHelper::getColumn(\app\models\PostCategory::findAll(['post_id' => $this->id]),
+                function ($element) {
+                    return $element['category_id'];
+                }
+            );
+        }
+        return $selected;
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        $selected = Yii::$app->request->post('PostCategories');
+        \app\models\PostCategory::deleteAll(['post_id' => $this->id]);
+        $insert_data = [];
+        foreach ($selected as $v) {
+            $insert_data[] = [$this->id, $v];
+        }
+        Yii::$app->db->createCommand()->batchInsert('post_category', ['post_id', 'category_id'], $insert_data)->execute();
+    }
 }

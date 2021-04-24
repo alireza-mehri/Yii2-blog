@@ -16,10 +16,12 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'content')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'category')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'status')->textInput() ?>
-
+    <div>
+        <?php
+        echo yii\helpers\Html::checkboxList('PostCategories' ,$model->getSelectedCategory() ,$model->getAllCategories());
+        ?>
+    </div>
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>
