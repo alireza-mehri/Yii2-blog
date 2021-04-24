@@ -29,7 +29,7 @@ class Post extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['status'], 'integer'],
+            [['status'], 'boolean'],
             [['title', 'category'], 'string', 'max' => 45],
             [['content'], 'string', 'max' => 400],
         ];

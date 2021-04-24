@@ -24,14 +24,14 @@ class m210424_083510_create_post_category_table extends Migration
             'post_id',
             'post',
             'id',
-            'CASCADE', 'CASCADE');
+            'CASCADE');
         $this->addForeignKey(
             'FK_categories',
             'post_category',
             'category_id',
             'categories',
             'id',
-            'CASCADE', 'CASCADE');
+            'CASCADE');
     }
 
     /**
@@ -39,7 +39,6 @@ class m210424_083510_create_post_category_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%post_category}}');
         $this->dropForeignKey(
             'FK_post',
             'post_category'
@@ -48,5 +47,6 @@ class m210424_083510_create_post_category_table extends Migration
             'FK_categories',
             'post_category'
         );
+        $this->dropTable('{{%post_category}}');
     }
 }
